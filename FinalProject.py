@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import math
 import csv
-train_csv=pd.read_csv('heart-disease-uci/heart.csv', sep=',')
+train_csv=pd.read_csv('heart.csv', sep=',')
 train_data=np.empty(10)
 weight=np.zeros(10)
 #train_data=np.empty(6)
@@ -58,42 +58,43 @@ print(weight)
 
 right=0
 error=0
-#for index,x in enumerate(train_data):
-#    answer=np.sign(weight.T.dot(x))
-#    if(answer!=target_list[index]):
-#        error=error+1
-#    else:
-#        right=right+1
-#print("right:",right)
-#print("error:",error)
-#print("accuracy:",round(right/(right+error),2))
+for index,x in enumerate(train_data):
+   answer=np.sign(weight.T.dot(x))
+   if(answer!=target_list[index]):
+       error=error+1
+   else:
+       right=right+1
+print("right:",right)
+print("error:",error)
+print("accuracy:",round(right/(right+error),2))
 
 
 #--------------------------------------------test for cross validation
 
-for i in range(0,10):
-    print(i)
-    for index,x in enumerate(train_data):
-        if(index>=cross_validation[i][0] and index<=cross_validation[i][1]):
-            continue
-        answer=np.sign(weight.T.dot(x))
-    #        print(weight)
-        if(answer!=target_list[index]):
-            weight+=x*target_list[index]
+# for i in range(0,10):
+#     print(i)
+#     for index,x in enumerate(train_data):
+#         if(index>=cross_validation[i][0] and index<=cross_validation[i][1]):
+#             continue
+#         answer=np.sign(weight.T.dot(x))
+#     #        print(weight)
+#         if(answer!=target_list[index]):
+#             weight+=x*target_list[index]
 
-    for index,x in enumerate(train_data):
-        if(index>=cross_validation[i][0] and index<=cross_validation[i][1]):
-            answer=np.sign(weight.T.dot(x))
-            if(answer!=target_list[index]):
-                error=error+1
-            else:
-                right=right+1
-        else:
-            continue
-    print("right:",right)
-    print("error:",error)
-    print("accuracy:",round(right/(right+error),2))            
-    #print(weight)
+#     for index,x in enumerate(train_data):
+#         if(index>=cross_validation[i][0] and index<=cross_validation[i][1]):
+#             answer=np.sign(weight.T.dot(x))
+#             if(answer!=target_list[index]):
+#                 error=error+1
+#             else:
+#                 right=right+1
+#         else:
+#             continue
+#     print("right:",right)
+#     print("error:",error)
+#     print("accuracy:",round(right/(right+error),2))            
+
+
 
 
 #for index,x in enumerate(train_data):
